@@ -1,15 +1,19 @@
 package com.andorid.fbgooglelogin;
 
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,6 +40,23 @@ public class LoginResultActivity extends AppCompatActivity {
 
         //imgProfile.setImageURI(profile.getProfilePictureUri(100,100));
 
-        Glide.with(getApplicationContext()).load(profile.getProfilePictureUri(100,100)).into(imgProfile);
+        //Glide.with(getApplicationContext()).load(profile.getProfilePictureUri(100,100)).into(imgProfile);
+
+        Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                imgProfile.setImageBitmap();
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
     }
 }
